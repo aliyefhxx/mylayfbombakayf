@@ -1,6 +1,5 @@
 services:
   - type: worker
-    name: ryhavenuserabot
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
