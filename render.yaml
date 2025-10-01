@@ -1,5 +1,6 @@
 services:
   - type: web
+    name: mytelegrambot
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
@@ -9,6 +10,3 @@ services:
         value: "28426518"
       - key: API_HASH
         value: "73150f4978e6495f73909d18594302dd"
-      - key: GITHUB_REPO
-        value: "aliyefhxx/mylayfbombakayf"
-      
