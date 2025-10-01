@@ -1,8 +1,13 @@
-FROM python:3.9-slim
+# ========================
+# Render üçün Dockerfile
+# ========================
+
+FROM python:3.9-bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
+# Lazım olan sistem paketləri
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
@@ -24,14 +29,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-distutils \
     && rm -rf /var/lib/apt/lists/*
 
+# Python bağımlılıqları
 COPY requirements.txt .
-
-# pip + setuptools + wheel yeniləmək vacibdir
 RUN pip install --upgrade pip setuptools wheel
-
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Kodları kopyala
 COPY . .
 
+# Logların düzgün çıxması üçün
 ENV PYTHONUNBUFFERED=1
+
+# Başlama komandası
 CMD ["python", "userbot.py"]
