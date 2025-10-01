@@ -1,6 +1,5 @@
 services:
   - type: web
-    name: mytelegrambot
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
