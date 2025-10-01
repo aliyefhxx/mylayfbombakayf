@@ -5,6 +5,7 @@ import traceback
 import asyncio
 import base64
 import requests
+from telethon import events
 from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import CreateChannelRequest
@@ -30,6 +31,36 @@ GITHUB_FILE = "plugins.json"
 GITHUB_BRANCH = "main"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
+
+
+
+
+
+# Öz mesajlarını avtomatik qalın elə
+@client.on(events.NewMessage(outgoing=True))
+async def auto_bold_outgoing(event):
+    if event.text and not (event.text.startswith("**") and event.text.endswith("**")):
+        try:
+            await event.edit(f"**{event.text}**")
+        except:
+            pass
+
+# Telethon-un reply və respond funksiyalarını override edək
+_old_reply = events.NewMessage.Event.reply
+_old_respond = events.NewMessage.Event.respond
+
+async def bold_reply(self, *args, **kwargs):
+    if args and isinstance(args[0], str):
+        args = (f"**{args[0]}**",) + args[1:]
+    return await _old_reply(self, *args, **kwargs)
+
+async def bold_respond(self, *args, **kwargs):
+    if args and isinstance(args[0], str):
+        args = (f"**{args[0]}**",) + args[1:]
+    return await _old_respond(self, *args, **kwargs)
+
+events.NewMessage.Event.reply = bold_reply
+events.NewMessage.Event.respond = bold_respond
 # =================== HELPERS ===================
 def load_plugins():
     if not os.path.exists(PLUGINS_FILE):
