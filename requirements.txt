@@ -3,3 +3,4 @@ pytgcalls==3.0.0.dev24
 googletrans==4.0.0-rc1
 asyncio
 requests
+edge-tts==6.1.6
