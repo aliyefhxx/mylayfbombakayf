@@ -1,13 +1,9 @@
-# ========================
-# Render üçün Dockerfile
-# ========================
-
-FROM python:3.9-bullseye
+FROM python:3.9-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
-# Lazım olan sistem paketləri
+# Sistem paketləri: build-essential, ffmpeg, tesseract, zbar, libs for opencv/sndfile/psycopg2
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
@@ -26,19 +22,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     zlib1g-dev \
     libgl1 \
     libglib2.0-0 \
-    python3-distutils \
     && rm -rf /var/lib/apt/lists/*
 
-# Python bağımlılıqları
+# Kopyala və quraşdır
 COPY requirements.txt .
 RUN pip install --upgrade pip setuptools wheel
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Kodları kopyala
 COPY . .
 
-# Logların düzgün çıxması üçün
 ENV PYTHONUNBUFFERED=1
-
-# Başlama komandası
 CMD ["python", "userbot.py"]
