@@ -31,4 +31,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Kodları köçür
 COPY . .
 
-CMD ["python", "main.py"]
+# Botu işə sal
+CMD ["python", "userbot.py"]
