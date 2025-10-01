@@ -1,5 +1,5 @@
 services:
-  - type: worker
+  - type: wep
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
