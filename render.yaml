@@ -1,13 +1,14 @@
 services:
-  - type: wep
+  - type: web
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
     autoDeploy: true
     envVars:
       - key: API_ID
-        value: "28426518"    
+        value: "28426518"
       - key: API_HASH
-        value: "73150f4978e6495f73909d18594302dd"   
+        value: "73150f4978e6495f73909d18594302dd"
       - key: GITHUB_REPO
-        value: "aliyefhxx/mylayfbombakayf"   
+        value: "aliyefhxx/mylayfbombakayf"
+      
