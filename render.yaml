@@ -6,7 +6,7 @@ services:
     autoDeploy: true
     envVars:
       - key: API_ID
-        value: "28426518"    API_ID-ni yaz
+        value: "28426518"    
       - key: API_HASH
         value: "73150f4978e6495f73909d18594302dd"   
       - key: GITHUB_REPO
