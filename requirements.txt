@@ -4,3 +4,4 @@ googletrans==4.0.0-rc1
 asyncio
 requests
 edge-tts==6.1.6
+Pillow
