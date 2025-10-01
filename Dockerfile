@@ -1,8 +1,5 @@
 FROM python:3.9-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
-WORKDIR /app
-
 # Sistem paketləri
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -23,14 +20,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 \
     libglib2.0-0 \
     python3-dev \
-    python3-distutils \
     && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /app
+
+# Requirements quraşdır
 COPY requirements.txt .
-RUN pip install --upgrade pip setuptools wheel
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Kodları köçür
 COPY . .
 
-ENV PYTHONUNBUFFERED=1
-CMD ["python", "userbot.py"]
+CMD ["python", "main.py"]
