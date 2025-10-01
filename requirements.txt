@@ -1,87 +1,87 @@
 # Core Telegram & networking
-telethon
-pyrogram
-tgcrypto
-aiohttp
-httpx
-requests
-asyncio
-aiofiles
+telethon==1.34.0
+pyrogram==2.0.106
+tgcrypto==1.2.5
+aiohttp==3.8.5
+httpx==0.27.0
+requests==2.31.0
+asyncio==3.4.3
+aiofiles==23.2.1
 
 # TTS / Speech synthesis
-gTTS
-pyttsx3
-edge-tts
-TTS
-google-cloud-texttospeech
+gTTS==2.3.2
+pyttsx3==2.90
+edge-tts==6.1.6
+TTS==0.22.0
+google-cloud-texttospeech==2.16.3
 
 # Audio playback / processing
-pydub
-ffmpeg-python
-soundfile
-sounddevice
-simpleaudio
-playsound
+pydub==0.25.1
+ffmpeg-python==0.2.0
+soundfile==0.12.1
+sounddevice==0.4.6
+simpleaudio==1.0.4
+playsound==1.3.0
 
 # YouTube / media download & handling
-yt-dlp
-youtube-search-python
+yt-dlp==2023.11.14
+youtube-search-python==1.6.6
 
 # Voice chat (Telegram group calls)
-pytgcalls
-PyNaCl
+pytgcalls==3.0.0.dev22
+PyNaCl==1.5.0
 
 # Speech recognition / STT
-SpeechRecognition
-vosk
-whisper
+SpeechRecognition==3.10.1
+vosk==0.3.45
+openai-whisper==20231117
 
 # Image / OCR / vision
-pillow
-opencv-python
-numpy
-pytesseract
-tesserocr
-pyzbar
-qrcode
+pillow==9.5.0
+opencv-python==4.8.1.78
+numpy==1.23.5
+pytesseract==0.3.10
+tesserocr==2.5.2
+pyzbar==0.1.9
+qrcode==7.4.2
 
 # Web scraping / parsing
-beautifulsoup4
-lxml
-selenium
+beautifulsoup4==4.12.2
+lxml==4.9.3
+selenium==4.15.2
 
 # Databases
-pymongo
-motor
-sqlalchemy
-psycopg2-binary
-redis
+pymongo==4.5.0
+motor==3.3.1
+sqlalchemy==1.4.49
+psycopg2-binary==2.9.9
+redis==5.0.1
 
 # Emoji support
-emoji
-emoji-country-flag
+emoji==2.8.0
+emoji-country-flag==1.3.0
 
 # Utilities & tools
-python-dotenv
-gitpython
-heroku3
-gTTS-token
-python-magic
-regex
-dateparser
-humanize
-validators
+python-dotenv==1.0.0
+gitpython==3.1.41
+heroku3==5.2.1
+gTTS-token==1.1.4
+python-magic==0.4.27
+regex==2023.10.3
+dateparser==1.1.8
+humanize==4.9.0
+validators==0.22.0
 
 # Crypto / security
-cryptg
-pycryptodome
+cryptg==0.4.0
+pycryptodome==3.19.0
 
 # Misc ML/NLP
-transformers
-sentencepiece
-torch
+transformers==4.33.3
+sentencepiece==0.1.99
+torch==2.0.1
 
 # Optional extras
-opencv-contrib-python
-scipy
-matplotlib
+opencv-contrib-python==4.8.1.78
+scipy==1.10.1
+matplotlib==3.7.3
