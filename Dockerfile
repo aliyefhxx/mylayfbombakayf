@@ -3,6 +3,7 @@ FROM python:3.9-slim
 ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 
+# Sistem paketləri
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     git \
