@@ -12,7 +12,7 @@ aiofiles==23.2.1
 gTTS==2.3.2
 pyttsx3==2.90
 edge-tts==6.1.6
-TTS==0.22.0
+
 google-cloud-texttospeech==2.16.3
 
 # Audio playback / processing
