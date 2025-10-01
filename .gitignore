@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+
+# Virtual environment
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Logs
+*.log
+*.out
+*.err
+
+# Config / secrets
+*.session
+*.json
+*.sqlite
+*.db
+token.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Compiled / cache
+.mypy_cache/
+.pytest_cache/
+.cache/

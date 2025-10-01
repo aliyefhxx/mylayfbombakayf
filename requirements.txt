@@ -1,0 +1,87 @@
+# Core Telegram & networking
+telethon
+pyrogram
+tgcrypto
+aiohttp
+httpx
+requests
+asyncio
+aiofiles
+
+# TTS / Speech synthesis
+gTTS
+pyttsx3
+edge-tts
+TTS
+google-cloud-texttospeech
+
+# Audio playback / processing
+pydub
+ffmpeg-python
+soundfile
+sounddevice
+simpleaudio
+playsound
+
+# YouTube / media download & handling
+yt-dlp
+youtube-search-python
+
+# Voice chat (Telegram group calls)
+pytgcalls
+PyNaCl
+
+# Speech recognition / STT
+SpeechRecognition
+vosk
+whisper
+
+# Image / OCR / vision
+pillow
+opencv-python
+numpy
+pytesseract
+tesserocr
+pyzbar
+qrcode
+
+# Web scraping / parsing
+beautifulsoup4
+lxml
+selenium
+
+# Databases
+pymongo
+motor
+sqlalchemy
+psycopg2-binary
+redis
+
+# Emoji support
+emoji
+emoji-country-flag
+
+# Utilities & tools
+python-dotenv
+gitpython
+heroku3
+gTTS-token
+python-magic
+regex
+dateparser
+humanize
+validators
+
+# Crypto / security
+cryptg
+pycryptodome
+
+# Misc ML/NLP
+transformers
+sentencepiece
+torch
+
+# Optional extras
+opencv-contrib-python
+scipy
+matplotlib
