@@ -1,17 +1,14 @@
-# render.yaml
 services:
-  - type: web
-    name: ryhaven-bot
-    env: python
+  - type: worker
+    name: ryhavenuserabot
+    env: docker
     plan: free
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python userbot.py"
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
     envVars:
       - key: API_ID
-        sync: false
+        value: "28426518"    API_ID-ni yaz
       - key: API_HASH
-        sync: false
-      - key: PHONE
-        sync: false
-      - key: SESSION
-        sync: false
+        value: "73150f4978e6495f73909d18594302dd"   
+      - key: GITHUB_REPO
+        value: "aliyefhxx/mylayfbombakayf"   
