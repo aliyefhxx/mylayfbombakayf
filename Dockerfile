@@ -31,10 +31,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Kodları köçür
 COPY . .
 
-# (Əvvəlki addımlar -- copy, pip install və s. qalır)
-
-# Default PORT varsa istifadə et, yoxdursa 8080
-ENV PORT=8080
-
-# Botu arxa planda işə sal, ön planda isə http.server port açsın
-CMD ["sh", "-c", "python3 userbot.py & python3 -m http.server ${PORT:-8080} --bind 0.0.0.0"]
+ENV PYTHONUNBUFFERED=1
+CMD ["python", "userbot.py"]
