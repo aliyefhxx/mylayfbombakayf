@@ -5,3 +5,4 @@ asyncio
 requests
 edge-tts==6.1.6
 Pillow
+speedtest-cli==2.1.3
