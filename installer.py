@@ -6,7 +6,7 @@ import asyncio
 import base64
 import requests
 from telethon import events
-from telethon import TelegramClient, events, Button
+from telethon import TelegramClient, Button
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import CreateChannelRequest
 
@@ -32,9 +32,7 @@ GITHUB_BRANCH = "main"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
 
-# =================== MESAJLARI BOLD ET ===================
-
-# Öz outgoing mesajlarını bold elə
+# =================== AUTO BOLD ===================
 @client.on(events.NewMessage(outgoing=True))
 async def auto_bold_outgoing(event):
     if event.text and not (event.text.startswith("**") and event.text.endswith("**")):
@@ -43,30 +41,22 @@ async def auto_bold_outgoing(event):
         except:
             pass
 
-# Telethon-un cavab funksiyalarını override edirik
-_old_reply = events.NewMessage.Event.reply
-_old_respond = events.NewMessage.Event.respond
-_old_edit = events.NewMessage.Event.edit
-
-async def bold_reply(self, *args, **kwargs):
+# Custom wrapper: bold reply & respond
+async def bold_reply(event, *args, **kwargs):
     if args and isinstance(args[0], str):
         args = (f"**{args[0]}**",) + args[1:]
-    return await _old_reply(self, *args, **kwargs)
+    return await event.__class__.reply(event, *args, **kwargs)
 
-async def bold_respond(self, *args, **kwargs):
+async def bold_respond(event, *args, **kwargs):
     if args and isinstance(args[0], str):
         args = (f"**{args[0]}**",) + args[1:]
-    return await _old_respond(self, *args, **kwargs)
+    return await event.__class__.respond(event, *args, **kwargs)
 
-async def bold_edit(self, *args, **kwargs):
-    if args and isinstance(args[0], str):
-        args = (f"**{args[0]}**",) + args[1:]
-    return await _old_edit(self, *args, **kwargs)
-
-events.NewMessage.Event.reply = bold_reply
-events.NewMessage.Event.respond = bold_respond
-events.NewMessage.Event.edit = bold_edit
-
+# Monkeypatch etmək əvəzinə helper funksiyalar
+def patch_event(event):
+    event.bold_reply = lambda *a, **k: bold_reply(event, *a, **k)
+    event.bold_respond = lambda *a, **k: bold_respond(event, *a, **k)
+    return event
 
 # =================== HELPERS ===================
 def load_plugins():
@@ -110,7 +100,6 @@ def save_alive(data):
 
 async def send_log(error_text):
     if not os.path.exists(LOG_GROUP_FILE):
-        # İlk dəfə log qrupu yaradılır
         result = await client(CreateChannelRequest(
             title="Ryhaven Userbot Logs",
             about="Xəta qeydləri burda saxlanılır ⚡",
@@ -165,12 +154,14 @@ def github_update_file(content, message):
 # =================== ƏSAS KOMANDALAR ===================
 @client.on(events.NewMessage(pattern=r'\.alive'))
 async def alive(event):
+    event = patch_event(event)
     alive_data = load_alive()
     msg = alive_data.get(str(event.sender_id), "Ryhaven Userbot Aktivdir ⚡")
-    await event.edit(msg)
+    await event.edit(f"**{msg}**")
 
 @client.on(events.NewMessage(pattern=r'\.dalive'))
 async def dalive(event):
+    event = patch_event(event)
     args = event.raw_text.split(" ", 1)
     if len(args) == 1:
         return await event.edit("⚠️ İstifadə: `.dalive Mənim mesajım`")
@@ -181,6 +172,7 @@ async def dalive(event):
 
 @client.on(events.NewMessage(pattern=r'\.vlive'))
 async def vlive(event):
+    event = patch_event(event)
     sender = await event.get_sender()
     if sender.id not in ADMIN_IDS:
         return await event.edit("❌ Bu əmri yalnız admin istifadə edə bilər.")
