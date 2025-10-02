@@ -28,20 +28,28 @@ SUPPORT_GROUP = "RyhavenSupport"  # support qrupu username (link deyil!)
 # =================== GITHUB CONFIG ===================
 GITHUB_REPO = os.getenv("GITHUB_REPO", "aliyefhxx/mylayfbombakayf")
 GITHUB_FILE = "plugins.json"
-GITHUB_BRANCH = "main"
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
-
 
 # =================== AUTO BOLD ===================
 @client.on(events.NewMessage(outgoing=True))
 async def auto_bold_outgoing(event):
-    if event.text and not (event.text.startswith("**") and event.text.endswith("**")):
-        try:
-            await event.edit(f"**{event.text}**")
-        except:
-            pass
+    if not event.text:
+        return
+    
+    text = event.text.strip()
+    
+    # Əgər sadə yazdığın mesajdırsa → toxunma
+    if not text.startswith("."):
+        return
+    
+    # Əgər plugins.json-dakı və ya öz bot komandasıdırsa → qalın elə
+    if text.split()[0] in plugin_cmds or text.split()[0] in bot_cmds:
+        if not (text.startswith("**") and text.endswith("**")):
+            try:
+                await event.edit(f"**{text}**")
+            except:
+                pass
 
-# Custom wrapper: bold reply & respond
+# =================== Custom reply & respond (qalın olsun) ===================
 async def bold_reply(event, *args, **kwargs):
     if args and isinstance(args[0], str):
         args = (f"**{args[0]}**",) + args[1:]
@@ -52,12 +60,10 @@ async def bold_respond(event, *args, **kwargs):
         args = (f"**{args[0]}**",) + args[1:]
     return await event.__class__.respond(event, *args, **kwargs)
 
-# Monkeypatch etmək əvəzinə helper funksiyalar
 def patch_event(event):
     event.bold_reply = lambda *a, **k: bold_reply(event, *a, **k)
     event.bold_respond = lambda *a, **k: bold_respond(event, *a, **k)
     return event
-
 # =================== HELPERS ===================
 def load_plugins():
     if not os.path.exists(PLUGINS_FILE):
