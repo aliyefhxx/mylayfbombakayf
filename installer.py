@@ -9,6 +9,7 @@ from telethon import events
 from telethon import TelegramClient, events, Button
 from telethon.sessions import StringSession
 from telethon.tl.functions.channels import CreateChannelRequest
+from telethon.tl.custom.message import Message   # <-- Əlavə edildi
 
 # =================== CONFIG ===================
 api_id = int(os.getenv("API_ID", "12345"))            # Telegram API_ID
@@ -31,12 +32,7 @@ GITHUB_FILE = "plugins.json"
 GITHUB_BRANCH = "main"
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 
-
-
-
-
-
-# Öz mesajlarını avtomatik qalın elə
+# =================== AUTO BOLD ===================
 @client.on(events.NewMessage(outgoing=True))
 async def auto_bold_outgoing(event):
     if event.text and not (event.text.startswith("**") and event.text.endswith("**")):
@@ -45,9 +41,9 @@ async def auto_bold_outgoing(event):
         except:
             pass
 
-# Telethon-un reply və respond funksiyalarını override edək
-_old_reply = events.NewMessage.Event.reply
-_old_respond = events.NewMessage.Event.respond
+# Telethon-un reply və respond funksiyalarını override edək (Message üzərindən)
+_old_reply = Message.reply
+_old_respond = Message.respond
 
 async def bold_reply(self, *args, **kwargs):
     if args and isinstance(args[0], str):
@@ -59,8 +55,9 @@ async def bold_respond(self, *args, **kwargs):
         args = (f"**{args[0]}**",) + args[1:]
     return await _old_respond(self, *args, **kwargs)
 
-events.NewMessage.Event.reply = bold_reply
-events.NewMessage.Event.respond = bold_respond
+Message.reply = bold_reply
+Message.respond = bold_respond
+
 # =================== HELPERS ===================
 def load_plugins():
     if not os.path.exists(PLUGINS_FILE):
