@@ -1,1 +1,1 @@
-worker: python installer.py
+worker: python userbot.py
